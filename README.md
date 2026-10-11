@@ -142,8 +142,12 @@ sudo nix-channel --update      # follow upstream (security updates)
 
 Packages track the channel. Only individual packages are pinned, and only
 where upstream is broken for this hardware -- currently just bluez, via
-`overrideAttrs` in `modules/bluetooth.nix`. Prefer removing such a pin once
-the channel catches up.
+`overrideAttrs` in `modules/bluetooth.nix`, which holds it at 5.84 because
+newer releases regress badly on this setup.
+
+Note what that costs: a pinned package stops receiving upstream security
+fixes. Re-test it whenever the channel moves and delete the override as soon
+as upstream is usable again, rather than letting it sit indefinitely.
 
 ### Garbage collection
 
