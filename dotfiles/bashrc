@@ -1,0 +1,53 @@
+# ~/.bashrc — small, with a nice prompt, prefix history search and fzf Ctrl+R
+
+# Only run for interactive shells
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
+# ---------- History ----------
+HISTSIZE=50000
+HISTFILESIZE=100000
+HISTCONTROL=ignoreboth:erasedups   # no dupes, ignore lines starting with space
+shopt -s histappend                # append, don't overwrite
+shopt -s checkwinsize
+# Write each command to the history file immediately
+PROMPT_COMMAND="history -a${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+
+# ---------- Prompt ----------
+# Colours (wrapped in \[ \] so readline computes line length correctly)
+_c_reset='\[\e[0m\]'
+_c_green='\[\e[1;32m\]'
+_c_blue='\[\e[1;34m\]'
+_c_yellow='\[\e[0;33m\]'
+_c_red='\[\e[1;31m\]'
+_c_grey='\[\e[0;90m\]'
+
+
+_set_prompt() {
+    local exit_code=$?
+    local status=""
+    # Show exit code in red if the last command failed
+    [ $exit_code -ne 0 ] && status="${_c_red}✘ ${exit_code} ${_c_reset}"
+
+    PS1="${_c_grey}\t${_c_reset} ${status}${_c_green}\u@\h${_c_reset}:${_c_blue}\w${_c_reset} $ "
+}
+PROMPT_COMMAND="_set_prompt${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+
+# ---------- PageUp / PageDown: history search by prefix ----------
+bind '"\e[5~": history-search-backward'
+bind '"\e[6~": history-search-forward'
+
+# ---------- fzf: Ctrl+R history finder ----------
+# Preferred: fzf's own key bindings (fuzzy history with preview support).
+if command -v fzf >/dev/null 2>&1; then
+    eval "$(fzf --bash)"
+    export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+fi
+
+# ---------- Handy aliases ----------
+alias ls='ls --color=auto'
+alias ll='ls -alFh'
+alias grep='grep --color=auto'
+alias nixconf="vim ~/nixos-config"

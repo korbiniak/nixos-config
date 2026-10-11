@@ -1,0 +1,6 @@
+# Never commit local agent/editor state or build output.
+.claude/
+.direnv/
+result
+result-*
+*.hm-bak
