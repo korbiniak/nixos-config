@@ -1,0 +1,87 @@
+" ~/.vimrc — minimal and sensible
+
+" ---------- Basics ----------
+set nocompatible              " be Vim, not Vi
+filetype plugin indent on     " filetype detection, plugins and indenting
+syntax on                     " syntax highlighting
+set encoding=utf-8
+set hidden                    " switch buffers without saving first
+set autoread                  " reload files changed outside vim
+set belloff=all               " no beeping
+set backspace=indent,eol,start
+set mouse=a                   " mouse support
+set ttimeoutlen=50            " fast Esc
+
+" ---------- Line numbers ----------
+set number                    " absolute number on current line...
+set relativenumber            " ...relative numbers everywhere else
+
+" ---------- Indentation: spaces, not tabs ----------
+set expandtab                 " Tab key inserts spaces
+set tabstop=4                 " a real tab displays as 4 columns
+set shiftwidth=4              " indent/outdent by 4
+set softtabstop=4             " Tab/Backspace act like 4 spaces
+set autoindent
+set smartindent
+set shiftround                " round indent to multiple of shiftwidth
+
+" ---------- Search ----------
+set incsearch                 " search as you type
+set hlsearch                  " highlight matches
+set ignorecase                " case-insensitive...
+set smartcase                 " ...unless you type a capital
+" Clear search highlight with <Esc><Esc>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+
+" ---------- UI ----------
+set ruler                     " cursor position in status line
+set showcmd                   " show partial commands
+set showmode
+set laststatus=2              " always show status line
+set wildmenu                  " nicer command-line completion
+set wildmode=longest:full,full
+set cursorline                " highlight current line
+set scrolloff=5               " keep context around the cursor
+set sidescrolloff=5
+set display+=lastline         " show as much of a long last line as possible
+set nowrap                    " don't wrap long lines
+set splitbelow splitright     " more natural split directions
+if has('termguicolors') | set termguicolors | endif
+set background=dark
+
+" ---------- Files / undo ----------
+set nobackup
+set noswapfile
+if has('persistent_undo')
+  set undofile                " keep undo history across sessions
+  set undodir=~/.vim/undo
+  if !isdirectory(&undodir) | call mkdir(&undodir, 'p', 0700) | endif
+endif
+
+" ---------- Whitespace visibility ----------
+set list
+set listchars=tab:»·,trail:·,nbsp:␣
+
+" ---------- Remember last cursor position ----------
+augroup restore_cursor
+  autocmd!
+  autocmd BufReadPost *
+        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+        \ |   exe "normal! g`\""
+        \ | endif
+augroup END
+
+" ---------- Keep tabs where they are required ----------
+augroup tabs_required
+  autocmd!
+  autocmd FileType make setlocal noexpandtab
+  autocmd FileType go   setlocal noexpandtab
+augroup END
+
+" ---------- Small mappings ----------
+let mapleader = " "
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+" Move by visual line when wrapping is on
+nnoremap j gj
+nnoremap k gk

@@ -1,0 +1,68 @@
+[global]
+    monitor = 0
+    follow = mouse              # show on the monitor with the mouse
+
+    # geometry
+    width = 350
+    height = (0, 300)               # max height per notification
+    origin = top-center
+    offset = (10,40)              # leave room for an i3bar at the top
+    notification_limit = 5      # extras are hidden, shown as (N more)
+    indicate_hidden = yes
+
+    # look
+    font = sans-serif 11
+    frame_width = 2
+    corner_radius = 6
+    padding = 10
+    horizontal_padding = 12
+    gap_size = 6                # space between notifications
+    separator_height = 2
+    separator_color = frame
+    progress_bar = true
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 48
+
+    # text
+    markup = full
+    format = "<b>%s</b>\n%b"    # bold summary, body below
+    alignment = left
+    ellipsize = middle
+    show_age_threshold = 60     # show "(1m)" age on older ones
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes       # (A) / (U) for actions / URLs
+
+    # behaviour
+    sort = yes                  # critical first
+    idle_threshold = 120        # don't let notifications expire while you're AFK
+    sticky_history = yes
+    history_length = 50
+
+    # helpers (no absolute paths, which matters on NixOS)
+    dmenu = rofi -dmenu -p dunst
+    browser = brave
+
+    # mouse
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = context
+    mouse_right_click = close_all
+
+[urgency_low]
+    background = "#1e1e2e"
+    foreground = "#a6adc8"
+    frame_color = "#45475a"
+    timeout = 5
+
+[urgency_normal]
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
+    frame_color = "#89b4fa"
+    timeout = 10
+
+[urgency_critical]
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
+    frame_color = "#f38ba8"
+    timeout = 0                 # stays until dismissed
