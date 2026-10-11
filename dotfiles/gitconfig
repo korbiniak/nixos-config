@@ -3,3 +3,9 @@
 [user]
 	email = franciszek.malinka@gmail.com
 	name = Franek Malinka
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential

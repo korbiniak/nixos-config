@@ -39,6 +39,7 @@ in
     xclip # tmux copy-pipe in dotfiles/tmux.conf pipes selections to xclip
 
     # Editors / dev
+    gh # dotfiles/gitconfig registers it as the GitHub credential helper
     emacs
     vscode
     claude-code
