@@ -119,6 +119,11 @@
     ];
   };
 
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+  ];
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -128,8 +133,12 @@
     tmux
     arandr
     brave
-    fira-code
     git
+    tig
+    efibootmgr
+    libnotify
+    dunst
+    nil
     python3
     signal-desktop
     fzf
@@ -143,6 +152,10 @@
     pulseaudio
     discord
     claude-code
+    nixfmt
+    emacs
+    wireguard-tools 
+    protonvpn-gui
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
