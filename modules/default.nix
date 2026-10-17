@@ -19,16 +19,30 @@
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [ 8000 ];
+  networking.wg-quick.interfaces.wg0 = {
+    address = [ "10.0.0.7/24" ];
+    privateKeyFile = "/etc/wireguard/priv";
+    peers = [{
+        publicKey = "0tIVsOXs3axc9XHuWDEOEVvcYyeVXOhg7SjEo+KaPz0=";
+        endpoint = "framal.xyz:51820";
+        allowedIPs = [ "10.0.0.0/24" ];
+        persistentKeepalive = 25;
+    }];
+  };
+
+  programs.ssh.startAgent = true;
 
   # System-level tooling only: things needed to repair or rebuild this machine
   # before (or without) a user session. User-facing apps live in
   # home/framal.nix so they are managed per-user by home-manager.
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit the config! Nano is also installed by default.
-    git # needed to clone/update this repo itself
+    vim
+    git
     wget
     efibootmgr
-    wireguard-tools # wg/wg-quick need root anyway
-    proton-vpn # (was protonvpn-gui, renamed upstream); talks to NetworkManager
+    wireguard-tools
+    proton-vpn
   ];
+
 }

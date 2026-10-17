@@ -37,6 +37,8 @@ in
     ncdu
     tree
     xclip # tmux copy-pipe in dotfiles/tmux.conf pipes selections to xclip
+    glow
+    unzip
 
     # Editors / dev
     gh # dotfiles/gitconfig registers it as the GitHub credential helper
@@ -54,6 +56,7 @@ in
     rofi
     nitrogen
     arandr
+    kdePackages.okular
 
     # i3 session helpers referenced by dotfiles/i3/config
     dex # XDG autostart
@@ -102,6 +105,7 @@ in
     ".spacemacs".source = ../dotfiles/spacemacs;
     ".Xresources".source = ../dotfiles/Xresources;
     ".gitconfig".source = ../dotfiles/gitconfig;
+    ".ssh/config".source = ../dotfiles/ssh/config;
 
     # Referenced by ~/.config/nitrogen/bg-saved.cfg; see the README for the
     # one-off nitrogen step on a new machine.
