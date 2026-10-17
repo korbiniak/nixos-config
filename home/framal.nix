@@ -18,6 +18,8 @@ let
   };
 in
 {
+  imports = [ ./wiki.nix ];
+
   home.username = "framal";
   home.homeDirectory = "/home/framal";
 

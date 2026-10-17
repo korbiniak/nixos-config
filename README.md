@@ -21,6 +21,7 @@ modules/               shared system config, imported by every host
   users.nix              user accounts
   home-manager.nix       home-manager-as-NixOS-module wiring
 home/framal.nix        the user environment: packages, services, dotfile links
+home/wiki.nix          the private wiki, served as a user service from ~/projects/wiki
 dotfiles/              static config files, linked into $HOME by home-manager
 ```
 
