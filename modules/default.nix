@@ -12,6 +12,7 @@
     ./audio.nix
     ./bluetooth.nix
     ./gaming.nix
+    ./input-method.nix
     ./home-manager.nix
   ];
 
