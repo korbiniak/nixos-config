@@ -22,7 +22,7 @@ font pango:Fira Code 10
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id nitrogen --restore
 
 # dunst is started by the home-manager systemd user service (services.dunst),
 # so it is deliberately not exec'd here.

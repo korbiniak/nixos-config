@@ -25,12 +25,14 @@
     address = [ "10.0.0.7/24" ];
     privateKeyFile = "/etc/wireguard/priv";
     peers = [{
-        publicKey = "0tIVsOXs3axc9XHuWDEOEVvcYyeVXOhg7SjEo+KaPz0=";
+        publicKey = "cl0M5nsksoGjd8kWAQ7gv+o9wz6C+fDo/dhm5NJ4uyA=";
         endpoint = "framal.xyz:51820";
         allowedIPs = [ "10.0.0.0/24" ];
         persistentKeepalive = 25;
     }];
   };
+
+  security.pki.caCertificateBlacklist = [ "emSign ECC Root CA - G3" ];
 
   programs.ssh.startAgent = true;
 
